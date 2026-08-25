@@ -62,7 +62,7 @@
         <div class="panel">
           <table class="data-table">
             <thead><tr><th>标题</th><th>状态</th><th>播放量</th><th></th></tr></thead>
-            <tbody id="videosTableBody"><tr class="empty-row"><td colspan="7">加载中…</td></tr></tbody>
+            <tbody id="videosTableBody"><tr class="empty-row"><td colspan="4">加载中…</td></tr></tbody>
           </table>
         </div>
       </section>
@@ -145,6 +145,17 @@
       <!-- Withdrawals -->
       <section class="app-view" data-view="mine">
         <div class="view-head"><div><h2>我的</h2><p>账户信息、提现和历史记录。</p></div></div>
+        <div class="panel mobile-profile-card">
+          <div class="avatar mobile-profile-avatar" id="profileAvatar">--</div>
+          <div>
+            <strong id="profileName">我的账户</strong>
+            <p id="profileHint">管理套餐、提现和发布记录。</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>我的套餐账户</h3></div>
+          <div class="rented-account-list" id="rentedAccountsList">加载中…</div>
+        </div>
         <div class="stat-grid" style="margin-bottom:22px;">
           <div class="stat-card"><small>可提现余额</small><strong id="withdrawableBalance">—</strong></div>
         </div>

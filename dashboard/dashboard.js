@@ -38,6 +38,7 @@ document.getElementById("logoutBtn").addEventListener("click", () => logout("log
 
   document.getElementById("userName").textContent = profile.full_name || profile.email;
   document.getElementById("userEmail").textContent = profile.email;
+  document.getElementById("profileName").textContent = profile.full_name || profile.email;
   document.getElementById("userAvatar").textContent = (profile.full_name || profile.email || "?").slice(0, 1).toUpperCase();
   document.getElementById("profileAvatar").textContent = (profile.full_name || profile.email || "?").slice(0, 1).toUpperCase();
 
