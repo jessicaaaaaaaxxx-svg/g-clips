@@ -34,6 +34,17 @@
    ```
 3. 之后就可以用这个邮箱在 `/admin/login.html` 登录管理后台了。
 
+## 测试账号
+
+当前演示环境已创建两组测试账号：
+
+| 区域 | 邮箱 | 密码 |
+| --- | --- | --- |
+| 管理后台 | `admin@gclips.test` | `GclipsAdmin123!` |
+| 创作者中心 | `creator@gclips.test` | `GclipsCreator123!` |
+
+如果重建 Supabase 项目，需要重新在 Auth 中创建这两个用户，并确保 `public.profiles` 中对应角色分别为 `admin` 和 `creator`。
+
 ## 第三步：本地运行（可选，用于开发调试）
 
 ```powershell

@@ -97,6 +97,19 @@ input, select, textarea { font: inherit; }
 .alert.error { background: #fdeceb; color: var(--danger); }
 .alert.success { background: #e9f7f0; color: var(--success); }
 
+.test-account-card {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border: 1px solid #f0d8cf;
+  border-radius: 8px;
+  background: #fff7f2;
+}
+.test-account-card strong { display: block; margin-bottom: 8px; font-size: 12px; color: var(--orange-dark); }
+.test-account-card dl { display: grid; gap: 6px; margin: 0; }
+.test-account-card div { display: flex; justify-content: space-between; gap: 12px; }
+.test-account-card dt { color: var(--muted); font-size: 12px; font-weight: 700; }
+.test-account-card dd { margin: 0; color: var(--ink); font-size: 12px; font-weight: 800; text-align: right; }
+
 /* ---------------------------------------------------------- Split auth layout (creator pages) */
 .auth-split {
   min-height: 100vh;
