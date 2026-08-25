@@ -1,4 +1,5 @@
 const { createClient } = require("@supabase/supabase-js");
+const WebSocket = require("ws");
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -8,6 +9,8 @@ let supabaseAdmin = null;
 if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
   supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
     auth: { autoRefreshToken: false, persistSession: false },
+    // Railway Node runtime may not expose a global WebSocket for Supabase Realtime.
+    realtime: { transport: WebSocket },
   });
 } else {
   console.warn(
