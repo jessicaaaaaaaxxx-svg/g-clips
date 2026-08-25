@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创作者中心 · G Clips</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="app-brand"><span class="mark">G</span> G CLIPS</div>
+      <nav class="app-nav">
+        <button type="button" class="nav-link active" data-view="overview">📊 概览</button>
+        <button type="button" class="nav-link" data-view="videos">🎬 我的作品</button>
+        <button type="button" class="nav-link" data-view="upload">⬆️ 上传作品</button>
+        <button type="button" class="nav-link" data-view="accounts">🎭 创作账户</button>
+        <button type="button" class="nav-link" data-view="withdrawals">💰 提现</button>
+      </nav>
+      <div class="app-user">
+        <div class="who">
+          <div class="avatar" id="userAvatar">--</div>
+          <div>
+            <div class="name" id="userName">—</div>
+            <div class="email" id="userEmail">—</div>
+          </div>
+        </div>
+        <button type="button" class="btn ghost small" id="logoutBtn" style="width:100%;">退出登录</button>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <!-- Overview -->
+      <section class="app-view active" data-view="overview">
+        <div class="view-head">
+          <div>
+            <h2>创作数据概览</h2>
+            <p>实时查看播放、互动与收益表现。</p>
+          </div>
+        </div>
+        <div class="stat-grid" id="overviewStats">
+          <div class="stat-card"><small>总播放量</small><strong>—</strong></div>
+          <div class="stat-card"><small>预估总收益</small><strong>—</strong></div>
+          <div class="stat-card"><small>可提现余额</small><strong>—</strong></div>
+          <div class="stat-card"><small>已发布作品</small><strong>—</strong></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>最近结算记录</h3></div>
+          <table class="data-table">
+            <thead><tr><th>日期</th><th>金额</th><th>备注</th></tr></thead>
+            <tbody id="ledgerTableBody"><tr class="empty-row"><td colspan="3">加载中…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- My Videos -->
+      <section class="app-view" data-view="videos">
+        <div class="view-head">
+          <div><h2>我的作品</h2><p>查看每条作品的审核状态与表现。</p></div>
+          <button type="button" class="btn small" data-goto="upload">＋ 上传新作品</button>
+        </div>
+        <div class="panel">
+          <table class="data-table">
+            <thead><tr><th>标题</th><th>账户</th><th>状态</th><th>播放量</th><th>预估收益</th><th>提交时间</th><th></th></tr></thead>
+            <tbody id="videosTableBody"><tr class="empty-row"><td colspan="7">加载中…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Upload -->
+      <section class="app-view" data-view="upload">
+        <div class="view-head"><div><h2>上传新作品</h2><p>支持视频或图片素材，AI 会自动生成剪辑方向和标题文案。</p></div></div>
+        <div class="panel" style="max-width:720px;">
+          <div id="uploadAlert"></div>
+          <label class="upload-drop" for="videoFileInput">
+            <div id="uploadDropLabel">点击选择视频 / 图片素材（支持 mp4 / mov / jpg / png，最大 200MB）</div>
+          </label>
+          <input type="file" id="videoFileInput" accept="video/*,image/*" style="display:none;">
+
+          <div class="ai-generation-card" id="aiGenerationCard">
+            <div class="ai-generation-head">
+              <div>
+                <small>AI 智能剪辑</small>
+                <h3>自动生成标题、节奏和剪辑脚本</h3>
+              </div>
+              <button type="button" class="btn ghost small" id="generateAiBtn">生成方案</button>
+            </div>
+            <div class="ai-generation-body">
+              <div class="ai-generation-item">
+                <label>推荐标题</label>
+                <div class="ai-generation-value" id="aiGeneratedTitle">等待上传素材…</div>
+              </div>
+              <div class="ai-generation-item">
+                <label>推荐文案</label>
+                <div class="ai-generation-value" id="aiGeneratedDescription">上传视频或图片后，AI 会根据内容方向自动生成标题、文案和标签。</div>
+              </div>
+              <div class="ai-tags" id="aiGeneratedTags"></div>
+            </div>
+
+            <div class="ai-editor-preview" id="aiEditorPreview">
+              <div class="ai-preview-header">
+                <span>剪辑脚本</span>
+                <strong id="aiFormatLabel">竖版 9:16</strong>
+              </div>
+              <div class="ai-preview-body" id="aiPlanGrid"></div>
+            </div>
+
+            <button type="button" class="btn secondary small" id="applyAiBtn" style="margin-top:14px;">应用到表单</button>
+          </div>
+
+          <form id="uploadForm">
+            <div class="field">
+              <label for="videoTitle">标题</label>
+              <input type="text" id="videoTitle" required placeholder="给作品起个吸引人的标题">
+            </div>
+            <div class="field">
+              <label for="videoDescription">简介</label>
+              <textarea id="videoDescription" placeholder="简单描述一下这条视频的内容"></textarea>
+            </div>
+            <div class="field">
+              <label for="videoAccount">发布账户</label>
+              <select id="videoAccount"><option value="">暂不指定 / 由平台安排</option></select>
+            </div>
+            <button type="submit" class="btn" id="uploadSubmitBtn">提交审核</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Accounts -->
+      <section class="app-view" data-view="accounts">
+        <div class="view-head"><div><h2>创作账户</h2><p>查看已分配给你的抖音账户，以及当前可租用的账户池。</p></div></div>
+        <div class="panel">
+          <div class="tag-select-grid" id="accountsGrid">
+            <p style="color:var(--muted);font-size:13px;">加载中…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Withdrawals -->
+      <section class="app-view" data-view="withdrawals">
+        <div class="view-head"><div><h2>提现管理</h2><p>申请提现并查看历史记录。</p></div></div>
+        <div class="stat-grid" style="margin-bottom:22px;">
+          <div class="stat-card"><small>可提现余额</small><strong id="withdrawableBalance">—</strong></div>
+        </div>
+        <div class="panel" style="max-width:520px;">
+          <div class="panel-head"><h3>申请提现</h3></div>
+          <div id="withdrawAlert"></div>
+          <form id="withdrawForm">
+            <div class="field">
+              <label for="withdrawAmount">提现金额 (¥)</label>
+              <input type="number" id="withdrawAmount" min="1" step="0.01" required>
+            </div>
+            <div class="field">
+              <label for="withdrawMethod">收款方式</label>
+              <select id="withdrawMethod" required>
+                <option value="paypal">PayPal</option>
+                <option value="bank_transfer">银行转账</option>
+                <option value="alipay">支付宝</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="withdrawAccount">收款账号 / 详细信息</label>
+              <input type="text" id="withdrawAccount" required placeholder="例如 PayPal 邮箱或银行卡号">
+            </div>
+            <button type="submit" class="btn" id="withdrawSubmitBtn">提交申请</button>
+          </form>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>提现历史</h3></div>
+          <table class="data-table">
+            <thead><tr><th>申请时间</th><th>金额</th><th>方式</th><th>状态</th></tr></thead>
+            <tbody id="withdrawalsTableBody"><tr class="empty-row"><td colspan="4">加载中…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="../shared/config.js"></script>
+  <script src="../shared/app-core.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

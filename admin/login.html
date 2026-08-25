@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理员登录 · G Clips</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/app.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-brand"><span class="mark">G</span> G CLIPS · 管理后台</div>
+      <p class="sub">仅限平台管理员登录。</p>
+
+      <div id="alertBox"></div>
+
+      <form id="authForm">
+        <div class="field">
+          <label for="emailField">邮箱</label>
+          <input type="email" id="emailField" required autocomplete="email" placeholder="admin@example.com">
+        </div>
+        <div class="field">
+          <label for="passwordField">密码</label>
+          <input type="password" id="passwordField" required autocomplete="current-password" placeholder="密码">
+        </div>
+        <button type="submit" class="btn secondary" id="submitBtn">登录管理后台</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="../shared/config.js"></script>
+  <script src="../shared/app-core.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

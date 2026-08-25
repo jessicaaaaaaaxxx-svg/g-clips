@@ -1,0 +1,20 @@
+{
+  "name": "gclips-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "G Clips creator platform: marketing site + creator dashboard + admin backend, backed by Supabase and served by an Express API.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 · G Clips 创作者中心</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/app.css">
+</head>
+<body>
+  <div class="auth-split">
+    <aside class="auth-visual-panel">
+      <a class="auth-visual-back" href="../index.html">← 返回官网</a>
+      <div class="auth-visual-body">
+        <div class="auth-visual-badge"><span></span>全球创作者的中国增长入口</div>
+        <h1>让好内容，<br><em>被更多人看见</em></h1>
+        <p>租用抖音创作账户、上传短视频、追踪播放收益 — 一站搞定，无需中国手机号。</p>
+        <ul class="auth-visual-list">
+          <li><span>✓</span>无需中国手机号即可创作发布</li>
+          <li><span>✓</span>实时播放与收益数据看板</li>
+          <li><span>✓</span>AI 智能剪辑辅助，专属运营支持</li>
+        </ul>
+      </div>
+      <div class="auth-visual-foot">© 2026 G Clips</div>
+      <div class="auth-orb orb-a"></div>
+      <div class="auth-orb orb-b"></div>
+    </aside>
+
+    <main class="auth-form-panel">
+      <div class="auth-card">
+        <div class="auth-brand"><span class="mark">G</span> G CLIPS · 创作者中心</div>
+
+        <div class="auth-tabs" id="authTabs">
+          <button type="button" id="tabSignIn" class="active">登录</button>
+          <button type="button" id="tabSignUp">注册</button>
+        </div>
+
+        <div id="alertBox"></div>
+
+        <!-- Sign in / sign up form -->
+        <form id="authForm">
+          <div class="field" id="fullNameFieldWrap" style="display:none;">
+            <label for="fullNameField">姓名</label>
+            <input type="text" id="fullNameField" autocomplete="name" placeholder="你的姓名">
+            <small class="field-error" id="fullNameError">请输入你的姓名</small>
+          </div>
+          <div class="field">
+            <label for="emailField">邮箱</label>
+            <input type="email" id="emailField" required autocomplete="email" placeholder="you@example.com">
+            <small class="field-error" id="emailError">请输入有效的邮箱地址</small>
+          </div>
+          <div class="field">
+            <label for="passwordField">密码</label>
+            <div class="password-input-wrap">
+              <input type="password" id="passwordField" required autocomplete="current-password" minlength="6" placeholder="至少 6 位">
+              <button type="button" class="password-toggle" id="togglePassword" aria-label="显示密码" aria-pressed="false">
+                <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <small class="field-error" id="passwordError">密码至少需要 6 位</small>
+          </div>
+          <div class="field-hint-row" id="forgotPasswordRow">
+            <button type="button" class="link-button" id="forgotPasswordLink">忘记密码？</button>
+          </div>
+          <button type="submit" class="btn" id="submitBtn">
+            <span class="spinner" aria-hidden="true"></span>
+            <span class="btn-label">登录</span>
+          </button>
+        </form>
+
+        <!-- Forgot password form -->
+        <form id="resetForm" style="display:none;">
+          <p class="sub" style="margin:0 0 18px;">输入注册邮箱，我们会发送一封重置密码的邮件给你。</p>
+          <div class="field">
+            <label for="resetEmailField">邮箱</label>
+            <input type="email" id="resetEmailField" required autocomplete="email" placeholder="you@example.com">
+            <small class="field-error" id="resetEmailError">请输入有效的邮箱地址</small>
+          </div>
+          <button type="submit" class="btn" id="resetSubmitBtn">
+            <span class="spinner" aria-hidden="true"></span>
+            <span class="btn-label">发送重置邮件</span>
+          </button>
+          <div class="field-hint-row" style="justify-content:flex-start;margin-top:14px;">
+            <button type="button" class="link-button" id="backToSignInLink">‹ 返回登录</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="../shared/config.js"></script>
+  <script src="../shared/app-core.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

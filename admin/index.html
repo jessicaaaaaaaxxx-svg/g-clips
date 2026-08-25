@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理后台 · G Clips</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="app-brand"><span class="mark">G</span> G CLIPS 管理后台</div>
+      <nav class="app-nav">
+        <button type="button" class="nav-link active" data-view="overview">📊 平台概览</button>
+        <button type="button" class="nav-link" data-view="review">🎬 视频审核</button>
+        <button type="button" class="nav-link" data-view="creators">👥 创作者</button>
+        <button type="button" class="nav-link" data-view="accounts">🎭 抖音账户库</button>
+        <button type="button" class="nav-link" data-view="withdrawals">💰 提现审核</button>
+      </nav>
+      <div class="app-user">
+        <div class="who">
+          <div class="avatar" id="userAvatar">--</div>
+          <div>
+            <div class="name" id="userName">—</div>
+            <div class="email" id="userEmail">—</div>
+          </div>
+        </div>
+        <button type="button" class="btn ghost small" id="logoutBtn" style="width:100%;">退出登录</button>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <!-- Overview -->
+      <section class="app-view active" data-view="overview">
+        <div class="view-head"><div><h2>平台概览</h2><p>关键运营指标一览。</p></div></div>
+        <div class="stat-grid" id="statsGrid">
+          <div class="stat-card"><small>创作者总数</small><strong>—</strong></div>
+          <div class="stat-card"><small>待审核视频</small><strong>—</strong></div>
+          <div class="stat-card"><small>待处理提现</small><strong>—</strong></div>
+          <div class="stat-card"><small>平台总播放量</small><strong>—</strong></div>
+          <div class="stat-card"><small>预估总收益</small><strong>—</strong></div>
+          <div class="stat-card"><small>已结算总额</small><strong>—</strong></div>
+        </div>
+      </section>
+
+      <!-- Video review -->
+      <section class="app-view" data-view="review">
+        <div class="view-head">
+          <div><h2>视频审核</h2><p>审核创作者提交的作品，或更新播放数据并结算收益。</p></div>
+          <select id="reviewStatusFilter">
+            <option value="pending">待审核</option>
+            <option value="published">已发布</option>
+            <option value="rejected">已拒绝</option>
+            <option value="">全部</option>
+          </select>
+        </div>
+        <div class="panel">
+          <table class="data-table">
+            <thead><tr><th>标题</th><th>创作者</th><th>账户</th><th>状态</th><th>播放量</th><th>预估收益</th><th>已结算</th><th>操作</th></tr></thead>
+            <tbody id="reviewTableBody"><tr class="empty-row"><td colspan="8">加载中…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Creators -->
+      <section class="app-view" data-view="creators">
+        <div class="view-head"><div><h2>创作者管理</h2><p>查看已注册的创作者。</p></div></div>
+        <div class="panel">
+          <table class="data-table">
+            <thead><tr><th>姓名</th><th>邮箱</th><th>注册时间</th></tr></thead>
+            <tbody id="creatorsTableBody"><tr class="empty-row"><td colspan="3">加载中…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Accounts -->
+      <section class="app-view" data-view="accounts">
+        <div class="view-head">
+          <div><h2>抖音账户库</h2><p>管理可租用账户，并分配给创作者。</p></div>
+          <button type="button" class="btn small" id="newAccountBtn">＋ 新增账户</button>
+        </div>
+        <div class="panel" id="newAccountPanel" style="display:none;max-width:520px;">
+          <div class="panel-head"><h3>新增账户</h3></div>
+          <form id="newAccountForm">
+            <div class="field"><label for="accHandle">账户名</label><input type="text" id="accHandle" required placeholder="@example.account"></div>
+            <div class="field">
+              <label for="accNiche">内容领域</label>
+              <select id="accNiche" required>
+                <option value="travel">旅行 · 户外</option>
+                <option value="lifestyle">生活 · 美食</option>
+                <option value="tech">科技 · 数码</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="accTier">账户等级</label>
+              <select id="accTier" required>
+                <option value="explorer">探索者计划</option>
+                <option value="creator">创作者计划</option>
+                <option value="influence">影响力计划</option>
+              </select>
+            </div>
+            <div class="field"><label for="accFollowers">基础粉丝数</label><input type="number" id="accFollowers" min="0" value="0"></div>
+            <button type="submit" class="btn">创建账户</button>
+          </form>
+        </div>
+        <div class="panel">
+          <table class="data-table">
+            <thead><tr><th>账户</th><th>领域</th><th>等级</th><th>粉丝数</th><th>状态</th><th>分配给</th><th>操作</th></tr></thead>
+            <tbody id="accountsTableBody"><tr class="empty-row"><td colspan="7">加载中…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Withdrawals -->
+      <section class="app-view" data-view="withdrawals">
+        <div class="view-head">
+          <div><h2>提现审核</h2><p>处理创作者的提现申请。</p></div>
+          <select id="withdrawalStatusFilter">
+            <option value="pending">待处理</option>
+            <option value="approved">已批准</option>
+            <option value="paid">已支付</option>
+            <option value="rejected">已拒绝</option>
+            <option value="">全部</option>
+          </select>
+        </div>
+        <div class="panel">
+          <table class="data-table">
+            <thead><tr><th>创作者</th><th>金额</th><th>方式</th><th>收款信息</th><th>状态</th><th>申请时间</th><th>操作</th></tr></thead>
+            <tbody id="withdrawalsTableBody"><tr class="empty-row"><td colspan="7">加载中…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="../shared/config.js"></script>
+  <script src="../shared/app-core.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

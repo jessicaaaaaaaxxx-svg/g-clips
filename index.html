@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="G Clips 智能投放平台，连接全球创作者与中国短视频市场。" id="meta-description">
+  <title>G Clips｜让好内容，被更多人看见</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="G Clips 首页" data-i18n-aria="header.brandAria">
+      <span class="brand-mark">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M12 8h17a3 3 0 0 1 3 3v5H18a4 4 0 0 0-4 4v8h8v-5h10v6a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3V11a3 3 0 0 1 4-3Z"/>
+        </svg>
+      </span>
+      <span>G CLIPS</span>
+    </a>
+    <nav class="desktop-nav" aria-label="主导航" data-i18n-aria="nav.ariaLabel">
+      <a href="#how" data-i18n="nav.how">如何运作</a>
+      <a href="#accounts" data-i18n="nav.accounts">账户方案</a>
+      <a href="#earnings" data-i18n="nav.earnings">创作者收益</a>
+      <a href="#faq" data-i18n="nav.faq">常见问题</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switcher">
+        <button class="lang-button" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="切换语言" data-i18n-aria="header.langAria">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+          <span class="lang-current">中文</span>
+          <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <ul class="lang-menu" role="listbox">
+          <li role="option" data-lang="zh" aria-selected="true">中文</li>
+          <li role="option" data-lang="en" aria-selected="false">English</li>
+          <li role="option" data-lang="id" aria-selected="false">Bahasa Indonesia</li>
+          <li role="option" data-lang="ms" aria-selected="false">Bahasa Melayu</li>
+        </ul>
+      </div>
+      <a class="login-link" href="dashboard/login.html" data-i18n="header.login">登录</a>
+      <a class="button button-small" href="dashboard/login.html" data-i18n="header.cta">开始创作</a>
+      <button class="menu-button" type="button" aria-label="打开菜单" aria-expanded="false" data-i18n-aria="header.menuAria">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" aria-hidden="true">
+    <a href="#how" data-i18n="nav.how">如何运作</a>
+    <a href="#accounts" data-i18n="nav.accounts">账户方案</a>
+    <a href="#earnings" data-i18n="nav.earnings">创作者收益</a>
+    <a href="#faq" data-i18n="nav.faq">常见问题</a>
+    <div class="mobile-lang">
+      <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="id" aria-pressed="false">ID</button>
+      <button type="button" data-lang="ms" aria-pressed="false">MS</button>
+    </div>
+    <a class="button" href="dashboard/login.html" data-i18n="header.cta">开始创作</a>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-orb orb-one"></div>
+      <div class="hero-orb orb-two"></div>
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span></span><span data-i18n="hero.eyebrow">全球创作者的中国增长入口</span></div>
+        <h1 data-i18n-html="hero.titleHtml">让好内容，<br><em>被更多人看见</em></h1>
+        <p class="hero-description" data-i18n="hero.description">一站式租用抖音创作账户、上传短视频并追踪播放收益。无需中国手机号，也能轻松触达亿万中国用户。</p>
+        <div class="hero-cta">
+          <a class="button button-primary" href="#join"><span data-i18n="hero.ctaPrimary">免费开始创作</span> <span>↗</span></a>
+          <a class="watch-link" href="#how"><span class="play">▶</span> <span data-i18n="hero.watch">观看如何运作</span></a>
+        </div>
+        <div class="hero-proof">
+          <div class="avatars" aria-hidden="true">
+            <span style="--avatar:#f0b49c">L</span>
+            <span style="--avatar:#7f9ca7">M</span>
+            <span style="--avatar:#cf8e78">A</span>
+            <span style="--avatar:#b6a17b">J</span>
+          </div>
+          <div><strong>12,000+</strong><small data-i18n="hero.proofJoined">全球创作者已加入</small></div>
+          <div class="proof-line"></div>
+          <div><strong>4.9 <span class="stars">★★★★★</span></strong><small data-i18n="hero.proofRating">创作者综合评分</small></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="phone phone-back" aria-hidden="true">
+          <div class="phone-screen back-screen">
+            <div class="creator-mini">@NomadLuke</div>
+            <div class="video-caption">Lost in the mountains<br>#travel #china</div>
+            <div class="side-icons"><span>♥<small>8.2w</small></span><span>●<small>3,241</small></span><span>↗<small data-i18n="phone.share">分享</small></span></div>
+          </div>
+        </div>
+        <div class="phone phone-front">
+          <div class="phone-speaker"></div>
+          <div class="phone-screen front-screen">
+            <div class="douyin-top"><span data-i18n="phone.explore">探索</span><strong data-i18n="phone.recommend">推荐</strong><span data-i18n="phone.nearby">同城</span></div>
+            <div class="video-scene">
+              <div class="sun"></div>
+              <div class="mountain mountain-one"></div>
+              <div class="mountain mountain-two"></div>
+              <div class="traveler">♟</div>
+            </div>
+            <div class="video-info">
+              <strong>@NomadLuke</strong>
+              <p data-i18n="phone.caption">在云南的第 7 天，遇见了云海之上的日出。</p>
+              <small data-i18n="phone.audio">♫ 原声 - Nomad Luke</small>
+            </div>
+            <div class="video-actions"><span>♥<small>12.8w</small></span><span>●<small>5,642</small></span><span>★<small>2.1w</small></span><span>↗<small data-i18n="phone.share">分享</small></span></div>
+          </div>
+        </div>
+
+        <div class="float-card earnings-card">
+          <div class="float-icon" data-i18n="card.currencyIcon">¥</div>
+          <div><small data-i18n="card.earningsLabel">本月预估收益</small><strong data-i18n="card.earningsValue">¥ 8,642.50</strong><span class="up">↑ 24.8%</span></div>
+        </div>
+        <div class="float-card live-card">
+          <span class="live-dot"></span>
+          <div><small data-i18n="card.liveLabel">实时播放</small><strong>1,284,920</strong></div>
+          <svg viewBox="0 0 110 38" aria-hidden="true"><path d="M2 32C14 30 16 18 28 22s17 7 24-5 14 3 24-6 17-6 32-9"/></svg>
+        </div>
+        <div class="market-tag"><span>🇨🇳</span><div><small data-i18n="card.marketLabel">触达市场</small><strong data-i18n="card.marketValue">中国大陆</strong></div></div>
+      </div>
+
+      <div class="scroll-cue"><span></span><span data-i18n="hero.scrollCue">向下探索</span></div>
+    </section>
+
+    <section class="trust-strip">
+      <p data-i18n="trust.line">为全球创作者提供值得信赖的增长服务</p>
+      <div class="trust-items">
+        <span><b>▰</b> <span data-i18n="trust.item1">账户安全保障</span></span>
+        <span><b>◈</b> <span data-i18n="trust.item2">播放数据透明</span></span>
+        <span><b>◎</b> <span data-i18n="trust.item3">多币种结算</span></span>
+        <span><b>✦</b> <span data-i18n="trust.item4">专属运营支持</span></span>
+      </div>
+    </section>
+
+    <section class="process section" id="how">
+      <div class="section-heading reveal">
+        <span class="section-kicker">HOW IT WORKS</span>
+        <h2 data-i18n-html="process.headingHtml">三步开启你的<br><em>中国创作之旅</em></h2>
+        <p data-i18n="process.desc">我们处理账户与发布的复杂环节，你只需要专注于创作。</p>
+      </div>
+      <div class="steps">
+        <article class="step-card reveal">
+          <span class="step-number">01</span>
+          <div class="step-icon">▣</div>
+          <h3 data-i18n="step1.title">选择创作账户</h3>
+          <p data-i18n="step1.desc">根据内容领域与目标受众，选择经过认证的抖音创作账户。</p>
+        </article>
+        <div class="step-arrow">→</div>
+        <article class="step-card reveal">
+          <span class="step-number">02</span>
+          <div class="step-icon">↥</div>
+          <h3 data-i18n="step2.title">上传你的作品</h3>
+          <p data-i18n="step2.desc">上传原创短视频，智能工具辅助生成中文标题、标签与发布时间。</p>
+        </article>
+        <div class="step-arrow">→</div>
+        <article class="step-card reveal">
+          <span class="step-number">03</span>
+          <div class="step-icon">↗</div>
+          <h3 data-i18n="step3.title">获取播放收益</h3>
+          <p data-i18n="step3.desc">实时查看播放表现与预估收益，达到结算标准即可发起提现。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="ai-editing section" id="ai-editing">
+      <div class="ai-editing-copy reveal">
+        <span class="section-kicker">AI-POWERED EDITING</span>
+        <h2 data-i18n-html="ai.headingHtml">AI 智能剪辑，<br>让爆款<em>触手可及</em></h2>
+        <p data-i18n="ai.desc">上传原始素材，AI 自动识别精彩片段、生成字幕与封面文案，并适配抖音竖屏规范——不需要任何专业剪辑经验。</p>
+        <ul class="ai-feature-list">
+          <li><span>✦</span> <span data-i18n="ai.feature1">自动识别高光片段</span></li>
+          <li><span>✦</span> <span data-i18n="ai.feature2">智能生成中文字幕与配音</span></li>
+          <li><span>✦</span> <span data-i18n="ai.feature3">一键适配竖屏比例与爆款封面</span></li>
+          <li><span>✦</span> <span data-i18n="ai.feature4">AI 预测播放潜力，优选发布时机</span></li>
+        </ul>
+        <a class="button button-primary" href="#estimator"><span data-i18n="ai.cta">体验 AI 剪辑</span> <span>↗</span></a>
+      </div>
+      <div class="ai-editing-visual reveal">
+        <div class="ai-timeline-card">
+          <div class="ai-timeline-top">
+            <span class="ai-badge">✦ <span data-i18n="ai.badge">AI 剪辑中</span></span>
+            <span class="ai-progress-label">92%</span>
+          </div>
+          <div class="ai-progress-bar"><div class="ai-progress-fill"></div></div>
+          <div class="ai-timeline-track">
+            <div class="ai-clip-marker marker-1"><span data-i18n="ai.highlight">精彩片段</span></div>
+            <div class="ai-clip-marker marker-2"><span data-i18n="ai.highlight">精彩片段</span></div>
+            <div class="ai-clip-marker marker-3"><span data-i18n="ai.highlight">精彩片段</span></div>
+          </div>
+          <div class="ai-timeline-thumbs">
+            <div class="ai-thumb"></div><div class="ai-thumb active"></div><div class="ai-thumb"></div><div class="ai-thumb"></div><div class="ai-thumb"></div>
+          </div>
+          <div class="ai-output-row">
+            <div class="ai-output-item"><small data-i18n="ai.suggestedTitle">建议标题</small><strong data-i18n="ai.suggestedTitleValue">"云南日出，美到窒息！"</strong></div>
+            <div class="ai-output-item"><small data-i18n="ai.subtitle">字幕</small><strong data-i18n="ai.subtitleValue">自动生成 · 简体中文</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-section section" id="earnings">
+      <div class="dashboard-shell reveal">
+        <div class="dashboard-top">
+          <div class="dashboard-brand">G <span>CLIPS</span></div>
+          <div class="dashboard-search">⌕　<span data-i18n="dash.search">搜索作品、账户或数据</span></div>
+          <div class="dashboard-user">🔔 <span>NL</span></div>
+        </div>
+        <div class="dashboard-body">
+          <aside class="dashboard-nav">
+            <strong data-i18n="dash.nav1">概览</strong><span data-i18n="dash.nav2">作品管理</span><span data-i18n="dash.nav3">创作账户</span><span data-i18n="dash.nav4">收益中心</span><span data-i18n="dash.nav5">数据分析</span>
+          </aside>
+          <div class="dashboard-content">
+            <div class="dash-welcome"><div><small data-i18n="dash.greeting">早上好，Luke</small><h3 data-i18n="dash.overviewTitle">创作数据概览</h3></div><button data-i18n="dash.uploadBtn">上传新作品 ＋</button></div>
+            <div class="metrics">
+              <div><small data-i18n="dash.metric1Label">总播放量</small><strong>2.84M</strong><span>↑ 18.2%</span></div>
+              <div><small data-i18n="dash.metric2Label">本月收益</small><strong data-i18n="dash.metric2Value">¥8,642</strong><span>↑ 24.8%</span></div>
+              <div><small data-i18n="dash.metric3Label">互动总数</small><strong>186.3K</strong><span>↑ 12.4%</span></div>
+            </div>
+            <div class="chart-card">
+              <div><strong data-i18n="dash.chartTitle">播放与收益趋势</strong><small data-i18n="dash.chartRange">近 7 天⌄</small></div>
+              <svg viewBox="0 0 700 170" preserveAspectRatio="none" aria-label="播放趋势图" data-i18n-aria="dash.chartAria">
+                <defs><linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5f35" stop-opacity=".25"/><stop offset="1" stop-color="#ff5f35" stop-opacity="0"/></linearGradient></defs>
+                <path class="grid" d="M0 25H700M0 70H700M0 115H700M0 160H700"/>
+                <path class="area" d="M0 140C45 130 65 100 110 108S175 128 220 88 285 62 330 78 390 82 440 52 520 71 570 38 640 29 700 10V170H0Z"/>
+                <path class="line" d="M0 140C45 130 65 100 110 108S175 128 220 88 285 62 330 78 390 82 440 52 520 71 570 38 640 29 700 10"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-copy reveal">
+        <span class="section-kicker">REAL-TIME INSIGHTS</span>
+        <h2 data-i18n-html="dashCopy.headingHtml">每一次播放，<br>都清晰<em>可见</em></h2>
+        <p data-i18n="dashCopy.desc">专业数据看板实时同步作品表现。从播放趋势到互动画像，让每一个创作决策都有数据支撑。</p>
+        <ul>
+          <li><span>✓</span> <span data-i18n="dashCopy.li1">播放与互动数据实时更新</span></li>
+          <li><span>✓</span> <span data-i18n="dashCopy.li2">每条作品收益独立核算</span></li>
+          <li><span>✓</span> <span data-i18n="dashCopy.li3">透明规则，无隐藏费用</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="estimator section" id="estimator">
+      <div class="section-heading centered reveal">
+        <span class="section-kicker">EARNINGS CALCULATOR</span>
+        <h2 data-i18n-html="estimator.headingHtml">预估你的<em>播放收益</em></h2>
+        <p data-i18n="estimator.desc">拖动滑块，快速预估不同播放量下的月度收益区间。</p>
+      </div>
+      <div class="estimator-card reveal">
+        <div class="estimator-control">
+          <div class="estimator-control-head">
+            <span data-i18n="estimator.sliderLabel">预计月播放量</span>
+            <strong id="estimatorViewsLabel">500,000</strong>
+          </div>
+          <input type="range" id="estimatorSlider" class="estimator-slider" min="10000" max="5000000" step="10000" value="500000" aria-label="预计月播放量">
+          <div class="estimator-scale">
+            <span data-i18n="estimator.scaleMin">1万</span>
+            <span data-i18n="estimator.scaleMax">500万+</span>
+          </div>
+        </div>
+        <div class="estimator-result">
+          <div class="estimator-result-item">
+            <small data-i18n="estimator.earningsLabel">预估月收益</small>
+            <strong id="estimatorEarnings">¥ 1,250</strong>
+          </div>
+          <div class="estimator-result-item">
+            <small data-i18n="estimator.engagementLabel">预估互动量</small>
+            <strong id="estimatorEngagement">3.3万</strong>
+          </div>
+        </div>
+        <p class="estimator-note" data-i18n="estimator.note">*实际收益受内容质量、垂类及互动率影响，预估结果仅供参考。</p>
+      </div>
+    </section>
+
+    <section class="accounts section" id="accounts">
+      <div class="section-heading centered reveal">
+        <span class="section-kicker">CREATOR ACCOUNTS</span>
+        <h2 data-i18n-html="accounts.headingHtml">为你的内容，匹配<em>对的舞台</em></h2>
+        <p data-i18n="accounts.desc">所有账户均经过平台审核与持续维护，覆盖热门内容垂类。</p>
+      </div>
+      <div class="account-grid">
+        <article class="account-card reveal">
+          <div class="account-cover cover-travel"><span data-i18n="account1.cover">旅行 · 户外</span></div>
+          <div class="account-content"><small data-i18n="account1.tag">成长型账户</small><h3 data-i18n="account1.title">探索者计划</h3><p data-i18n="account1.desc">适合旅行、城市探索与户外生活内容。</p><div class="account-stats"><span><b>5万+</b><span data-i18n="account1.stat1Label">基础粉丝</span></span><span><b data-i18n="account1.stat2">高活跃</b><span data-i18n="account.weightLabel">账户权重</span></span></div><a href="#join"><span data-i18n="accounts.cta">查看方案</span> <b>→</b></a></div>
+        </article>
+        <article class="account-card featured reveal">
+          <div class="popular" data-i18n="accounts.popular">最受欢迎</div>
+          <div class="account-cover cover-life"><span data-i18n="account2.cover">生活 · 美食</span></div>
+          <div class="account-content"><small data-i18n="account2.tag">进阶型账户</small><h3 data-i18n="account2.title">创作者计划</h3><p data-i18n="account2.desc">适合美食、生活方式与创意内容。</p><div class="account-stats"><span><b>20万+</b><span data-i18n="account1.stat1Label">基础粉丝</span></span><span><b data-i18n="account2.stat2">优质</b><span data-i18n="account.weightLabel">账户权重</span></span></div><a href="#join"><span data-i18n="accounts.cta">查看方案</span> <b>→</b></a></div>
+        </article>
+        <article class="account-card reveal">
+          <div class="account-cover cover-tech"><span data-i18n="account3.cover">科技 · 数码</span></div>
+          <div class="account-content"><small data-i18n="account3.tag">专业型账户</small><h3 data-i18n="account3.title">影响力计划</h3><p data-i18n="account3.desc">适合科技、知识与高质量专业内容。</p><div class="account-stats"><span><b>50万+</b><span data-i18n="account1.stat1Label">基础粉丝</span></span><span><b data-i18n="account3.stat2">卓越</b><span data-i18n="account.weightLabel">账户权重</span></span></div><a href="#join"><span data-i18n="accounts.cta">查看方案</span> <b>→</b></a></div>
+        </article>
+      </div>
+      <p class="compliance-note" data-i18n="accounts.compliance">账户资源与发布服务需遵循平台规范，具体可用范围以审核结果和服务协议为准。</p>
+    </section>
+
+    <section class="quote-section">
+      <div class="quote-mark">“</div>
+      <blockquote data-i18n-html="quote.textHtml">以前我只能在 TikTok 分享我的旅行。现在，中国观众也能看到我的故事，<em>而且每一次播放都真正产生了价值。</em></blockquote>
+      <div class="quote-author"><span>NL</span><div><strong>Luke Morrison</strong><small data-i18n="quote.role">旅行创作者 · 英国</small></div></div>
+    </section>
+
+    <section class="faq section" id="faq">
+      <div class="section-heading reveal">
+        <span class="section-kicker">FAQ</span>
+        <h2 data-i18n="faq.heading">你可能想知道的</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details open><summary><span data-i18n="faq.q1">我需要拥有中国手机号吗？</span><span>＋</span></summary><p data-i18n="faq.a1">不需要。通过平台完成身份与内容审核后，可使用平台提供的合规创作及发布服务。</p></details>
+        <details><summary><span data-i18n="faq.q2">视频收益是如何计算的？</span><span>＋</span></summary><p data-i18n="faq.a2">收益受有效播放、互动质量、内容领域和商业任务等因素影响。后台会展示每条作品的核算明细。</p></details>
+        <details><summary><span data-i18n="faq.q3">什么类型的视频可以上传？</span><span>＋</span></summary><p data-i18n="faq.a3">平台欢迎原创、有价值且符合中国法律法规及内容平台规范的短视频。上传后会进行内容审核。</p></details>
+        <details><summary><span data-i18n="faq.q4">收益如何提现？</span><span>＋</span></summary><p data-i18n="faq.a4">满足最低结算标准后，可通过平台支持的国际收款方式发起提现，到账周期以结算页面为准。</p></details>
+      </div>
+    </section>
+
+    <section class="cta-section" id="join">
+      <div class="cta-orb"></div>
+      <div class="cta-copy reveal">
+        <span>READY TO CREATE?</span>
+        <h2 data-i18n-html="cta.headingHtml">下一个百万播放，<br>从这里开始</h2>
+        <p data-i18n="cta.desc">加入 G Clips，把你的创意带给更广阔的观众。</p>
+        <a class="button button-light" href="dashboard/login.html?mode=signup"><span data-i18n="cta.button">申请成为创作者</span> <b>↗</b></a>
+        <small data-i18n="cta.note">提交申请无需付费 · 平均 1–2 个工作日完成审核</small>
+      </div>
+      <div class="cta-visual" aria-hidden="true">
+        <div class="globe">G</div><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-main">
+      <div class="footer-brand"><a class="brand" href="#top"><span class="brand-mark"><svg viewBox="0 0 40 40"><path d="M12 8h17a3 3 0 0 1 3 3v5H18a4 4 0 0 0-4 4v8h8v-5h10v6a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3V11a3 3 0 0 1 4-3Z"/></svg></span><span>G CLIPS</span></a><p data-i18n="footer.desc">连接全球创作者与中国短视频市场。</p></div>
+      <div class="footer-links">
+        <div><strong data-i18n="footer.colPlatform">平台</strong><a href="#how" data-i18n="nav.how">如何运作</a><a href="#accounts" data-i18n="nav.accounts">账户方案</a><a href="#earnings" data-i18n="footer.linkEarnings">收益说明</a></div>
+        <div><strong data-i18n="footer.colSupport">支持</strong><a href="#faq" data-i18n="footer.linkHelp">帮助中心</a><a href="mailto:hello@gclips.example" data-i18n="footer.linkContact">联系我们</a><a href="#faq" data-i18n="footer.linkContent">内容规范</a></div>
+        <div><strong data-i18n="footer.colAbout">关于</strong><a href="#top" data-i18n="footer.linkAbout">关于我们</a><a href="#top" data-i18n="footer.linkTerms">服务协议</a><a href="#top" data-i18n="footer.linkPrivacy">隐私政策</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 G Clips. All rights reserved.</span><span>Made for creators, everywhere.</span></div>
+  </footer>
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
