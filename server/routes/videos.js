@@ -20,8 +20,19 @@ router.get("/mine", authenticate, async (req, res) => {
 router.post("/", authenticate, async (req, res) => {
   const { title, description, storage_path, douyin_account_id, cover_url } = req.body || {};
 
-  if (!title || !storage_path) {
-    return res.status(400).json({ error: "title and storage_path are required." });
+  if (!title || !storage_path || !douyin_account_id) {
+    return res.status(400).json({ error: "请先租用套餐账户，并选择发布账户后再上传作品。" });
+  }
+
+  const { data: account, error: accountError } = await supabaseAdmin
+    .from("douyin_accounts")
+    .select("id, assigned_to, status")
+    .eq("id", douyin_account_id)
+    .single();
+
+  if (accountError || !account) return res.status(404).json({ error: "发布账户不存在。" });
+  if (account.assigned_to !== req.profile.id || account.status !== "assigned") {
+    return res.status(403).json({ error: "只能使用已租用的套餐账户发布作品。" });
   }
 
   const { data, error } = await supabaseAdmin

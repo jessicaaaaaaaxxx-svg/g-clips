@@ -8,15 +8,14 @@
   <link rel="stylesheet" href="../shared/app.css">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="app-sidebar">
+  <div class="app-shell creator-mobile-app">
+    <aside class="app-sidebar mobile-bottom-nav">
       <div class="app-brand"><span class="mark">G</span> G CLIPS</div>
       <nav class="app-nav">
-        <button type="button" class="nav-link active" data-view="overview">📊 概览</button>
-        <button type="button" class="nav-link" data-view="videos">🎬 我的作品</button>
-        <button type="button" class="nav-link" data-view="upload">⬆️ 上传作品</button>
-        <button type="button" class="nav-link" data-view="accounts">🎭 创作账户</button>
-        <button type="button" class="nav-link" data-view="withdrawals">💰 提现</button>
+        <button type="button" class="nav-link active" data-view="home"><span>⌂</span>首页</button>
+        <button type="button" class="nav-link" data-view="packages"><span>◇</span>套餐</button>
+        <button type="button" class="nav-link" data-view="orders"><span>▣</span>订单</button>
+        <button type="button" class="nav-link" data-view="mine"><span>◉</span>我的</button>
       </nav>
       <div class="app-user">
         <div class="who">
@@ -32,11 +31,11 @@
 
     <main class="app-main">
       <!-- Overview -->
-      <section class="app-view active" data-view="overview">
+      <section class="app-view active" data-view="home">
         <div class="view-head">
           <div>
-            <h2>创作数据概览</h2>
-            <p>实时查看播放、互动与收益表现。</p>
+            <h2>首页</h2>
+            <p id="packageStatusCopy">先租用套餐账户，再上传作品提交发布。</p>
           </div>
         </div>
         <div class="stat-grid" id="overviewStats">
@@ -55,23 +54,28 @@
       </section>
 
       <!-- My Videos -->
-      <section class="app-view" data-view="videos">
+      <section class="app-view" data-view="orders">
         <div class="view-head">
-          <div><h2>我的作品</h2><p>查看每条作品的审核状态与表现。</p></div>
-          <button type="button" class="btn small" data-goto="upload">＋ 上传新作品</button>
+          <div><h2>订单</h2><p>上传作品并查看每条作品的审核状态。</p></div>
+          <button type="button" class="btn small" id="orderUploadShortcut">＋ 上传新作品</button>
         </div>
         <div class="panel">
           <table class="data-table">
-            <thead><tr><th>标题</th><th>账户</th><th>状态</th><th>播放量</th><th>预估收益</th><th>提交时间</th><th></th></tr></thead>
+            <thead><tr><th>标题</th><th>状态</th><th>播放量</th><th></th></tr></thead>
             <tbody id="videosTableBody"><tr class="empty-row"><td colspan="7">加载中…</td></tr></tbody>
           </table>
         </div>
       </section>
 
       <!-- Upload -->
-      <section class="app-view" data-view="upload">
+      <section class="app-view" data-view="orders">
         <div class="view-head"><div><h2>上传新作品</h2><p>支持视频或图片素材，AI 会自动生成剪辑方向和标题文案。</p></div></div>
-        <div class="panel" style="max-width:720px;">
+        <div class="panel upload-lock-panel" id="uploadLockPanel">
+          <h3>请先租用套餐账户</h3>
+          <p>租用套餐账户后，系统会解锁上传入口，并把作品绑定到你的发布账户。</p>
+          <button type="button" class="btn small" data-goto="packages">去租套餐</button>
+        </div>
+        <div class="panel" id="uploadPanel" style="max-width:720px;">
           <div id="uploadAlert"></div>
           <label class="upload-drop" for="videoFileInput">
             <div id="uploadDropLabel">点击选择视频 / 图片素材（支持 mp4 / mov / jpg / png，最大 200MB）</div>
@@ -120,7 +124,7 @@
             </div>
             <div class="field">
               <label for="videoAccount">发布账户</label>
-              <select id="videoAccount"><option value="">暂不指定 / 由平台安排</option></select>
+              <select id="videoAccount" required><option value="">请先租用套餐账户</option></select>
             </div>
             <button type="submit" class="btn" id="uploadSubmitBtn">提交审核</button>
           </form>
@@ -128,9 +132,10 @@
       </section>
 
       <!-- Accounts -->
-      <section class="app-view" data-view="accounts">
-        <div class="view-head"><div><h2>创作账户</h2><p>查看已分配给你的抖音账户，以及当前可租用的账户池。</p></div></div>
+      <section class="app-view" data-view="packages">
+        <div class="view-head"><div><h2>套餐</h2><p>选择并租用一个抖音套餐账户后，才可以上传作品发布。</p></div></div>
         <div class="panel">
+          <div id="packageAlert"></div>
           <div class="tag-select-grid" id="accountsGrid">
             <p style="color:var(--muted);font-size:13px;">加载中…</p>
           </div>
@@ -138,8 +143,8 @@
       </section>
 
       <!-- Withdrawals -->
-      <section class="app-view" data-view="withdrawals">
-        <div class="view-head"><div><h2>提现管理</h2><p>申请提现并查看历史记录。</p></div></div>
+      <section class="app-view" data-view="mine">
+        <div class="view-head"><div><h2>我的</h2><p>账户信息、提现和历史记录。</p></div></div>
         <div class="stat-grid" style="margin-bottom:22px;">
           <div class="stat-card"><small>可提现余额</small><strong id="withdrawableBalance">—</strong></div>
         </div>

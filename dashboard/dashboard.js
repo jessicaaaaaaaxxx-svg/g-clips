@@ -7,6 +7,8 @@ const WITHDRAWAL_STATUS_LABELS = { pending: "待处理", approved: "已批准", 
 const METHOD_LABELS = { paypal: "PayPal", bank_transfer: "银行转账", alipay: "支付宝" };
 
 let currentUser = null;
+let accountPackages = [];
+let rentedAccounts = [];
 
 // ---------------------------------------------------------------- Navigation
 document.querySelectorAll(".nav-link").forEach((btn) => {
@@ -14,6 +16,10 @@ document.querySelectorAll(".nav-link").forEach((btn) => {
 });
 document.querySelectorAll("[data-goto]").forEach((btn) => {
   btn.addEventListener("click", () => switchView(btn.dataset.goto));
+});
+
+document.getElementById("orderUploadShortcut").addEventListener("click", () => {
+  switchView(rentedAccounts.length ? "orders" : "packages");
 });
 
 function switchView(view) {
@@ -33,6 +39,7 @@ document.getElementById("logoutBtn").addEventListener("click", () => logout("log
   document.getElementById("userName").textContent = profile.full_name || profile.email;
   document.getElementById("userEmail").textContent = profile.email;
   document.getElementById("userAvatar").textContent = (profile.full_name || profile.email || "?").slice(0, 1).toUpperCase();
+  document.getElementById("profileAvatar").textContent = (profile.full_name || profile.email || "?").slice(0, 1).toUpperCase();
 
   await Promise.all([loadOverview(), loadVideos(), loadAccounts(), loadWithdrawals()]);
 })().catch((error) => {
@@ -74,7 +81,7 @@ async function loadVideos() {
   const tbody = document.getElementById("videosTableBody");
 
   if (!videos.length) {
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="7">还没有上传作品，去「上传作品」试试吧。</td></tr>`;
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="4">还没有上传作品。</td></tr>`;
     return;
   }
 
@@ -82,11 +89,8 @@ async function loadVideos() {
     .map(
       (v) => `<tr>
         <td>${escapeHtml(v.title)}</td>
-        <td>${v.douyin_account ? escapeHtml(v.douyin_account.account_handle) : "未指定"}</td>
         <td><span class="badge ${v.status}">${STATUS_LABELS[v.status] || v.status}</span></td>
         <td>${formatCompactNumber(v.views)}</td>
-        <td>${formatCny(v.estimated_earnings_cny)}</td>
-        <td>${formatDate(v.submitted_at)}</td>
         <td class="actions-cell">
           ${v.status === "pending" ? `<button class="btn danger small" data-delete="${v.id}">撤回</button>` : ""}
         </td>
@@ -112,30 +116,67 @@ async function loadAccounts() {
   const { accounts } = await apiFetch("/api/accounts/mine");
   const grid = document.getElementById("accountsGrid");
   const select = document.getElementById("videoAccount");
+  const uploadPanel = document.getElementById("uploadPanel");
+  const uploadLockPanel = document.getElementById("uploadLockPanel");
+  const packageStatusCopy = document.getElementById("packageStatusCopy");
+  const rentedAccountsList = document.getElementById("rentedAccountsList");
 
-  select.innerHTML = `<option value="">暂不指定 / 由平台安排</option>`;
+  accountPackages = accounts;
+  rentedAccounts = accounts.filter((acc) => acc.assigned_to === currentUser.id);
+
+  select.innerHTML = `<option value="">请选择已租用套餐账户</option>`;
+  uploadPanel.style.display = rentedAccounts.length ? "block" : "none";
+  uploadLockPanel.style.display = rentedAccounts.length ? "none" : "block";
+  packageStatusCopy.textContent = rentedAccounts.length
+    ? `已租用 ${rentedAccounts.length} 个套餐账户，可以上传作品提交发布。`
+    : "先租用套餐账户，再上传作品提交发布。";
+  rentedAccountsList.innerHTML = rentedAccounts.length
+    ? rentedAccounts.map((acc) => `<div class="rented-account-item"><strong>${escapeHtml(acc.account_handle)}</strong><span>${TIER_LABELS[acc.tier] || acc.tier}</span></div>`).join("")
+    : `<p style="color:var(--muted);font-size:13px;">还没有租用套餐账户。</p>`;
 
   if (!accounts.length) {
-    grid.innerHTML = `<p style="color:var(--muted);font-size:13px;">当前没有可用账户，请联系平台运营。</p>`;
+    grid.innerHTML = `<p style="color:var(--muted);font-size:13px;">当前没有可租用套餐，请联系平台运营。</p>`;
     return;
   }
 
   grid.innerHTML = accounts
     .map(
-      (acc) => `<div class="account-pick">
-        <strong>${escapeHtml(acc.account_handle)}</strong>
-        <small>${NICHE_LABELS[acc.niche] || acc.niche} · ${TIER_LABELS[acc.tier] || acc.tier}</small><br>
-        <span class="badge ${acc.status}" style="margin-top:8px;">${acc.status === "available" ? "可租用" : "已分配给你"}</span>
+      (acc) => `<div class="account-pick package-card ${acc.assigned_to === currentUser.id ? "rented" : ""}">
+        <strong>${TIER_LABELS[acc.tier] || acc.tier}</strong>
+        <small>${escapeHtml(acc.account_handle)} · ${NICHE_LABELS[acc.niche] || acc.niche}</small>
+        <div class="package-meta"><span>${formatCompactNumber(acc.follower_count)}粉丝</span><span>${acc.status === "available" ? "可租用" : "已租用"}</span></div>
+        ${acc.assigned_to === currentUser.id ? `<span class="badge assigned">我的套餐</span>` : `<button type="button" class="btn small" data-rent-account="${acc.id}">租用套餐</button>`}
       </div>`
     )
     .join("");
 
-  accounts.forEach((acc) => {
+  grid.querySelectorAll("[data-rent-account]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const alertBox = document.getElementById("packageAlert");
+      alertBox.innerHTML = "";
+      btn.disabled = true;
+      btn.textContent = "租用中…";
+      try {
+        await apiFetch(`/api/accounts/${btn.dataset.rentAccount}/rent`, { method: "POST" });
+        alertBox.innerHTML = `<div class="alert success">套餐账户租用成功，现在可以上传作品了。</div>`;
+        await loadAccounts();
+      } catch (error) {
+        alertBox.innerHTML = `<div class="alert error">租用失败：${escapeHtml(error.message)}</div>`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "租用套餐";
+      }
+    });
+  });
+
+  rentedAccounts.forEach((acc) => {
     const opt = document.createElement("option");
     opt.value = acc.id;
     opt.textContent = `${acc.account_handle} (${TIER_LABELS[acc.tier] || acc.tier})`;
     select.appendChild(opt);
   });
+
+  if (rentedAccounts.length === 1) select.value = rentedAccounts[0].id;
 }
 
 // ---------------------------------------------------------------- Upload
@@ -344,6 +385,18 @@ document.getElementById("uploadForm").addEventListener("submit", async (event) =
     return;
   }
 
+  if (!rentedAccounts.length) {
+    alertBox.innerHTML = `<div class="alert error">请先到「套餐」租用账户，再上传作品。</div>`;
+    switchView("packages");
+    return;
+  }
+
+  const douyin_account_id = document.getElementById("videoAccount").value || null;
+  if (!douyin_account_id) {
+    alertBox.innerHTML = `<div class="alert error">请选择已租用的套餐账户。</div>`;
+    return;
+  }
+
   submitBtn.disabled = true;
   submitBtn.textContent = "上传中…";
 
@@ -354,7 +407,6 @@ document.getElementById("uploadForm").addEventListener("submit", async (event) =
 
     const title = document.getElementById("videoTitle").value.trim();
     const description = document.getElementById("videoDescription").value.trim();
-    const douyin_account_id = document.getElementById("videoAccount").value || null;
 
     if (!title) {
       throw new Error("标题不能为空，请先生成或填写标题。")
