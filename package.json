@@ -6,6 +6,7 @@
   "main": "server/index.js",
   "scripts": {
     "build:cloudflare": "node scripts/build-cloudflare.js",
+    "prepare": "node scripts/build-cloudflare.js",
     "start": "node server/index.js",
     "dev": "node --watch server/index.js"
   },
