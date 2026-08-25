@@ -1,0 +1,15 @@
+{
+  "name": "g-clips",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-26",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "vars": {
+    "RAILWAY_API_ORIGIN": "https://g-clips-production.up.railway.app"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

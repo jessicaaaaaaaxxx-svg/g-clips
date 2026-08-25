@@ -5,6 +5,7 @@
   "description": "G Clips creator platform: marketing site + creator dashboard + admin backend, backed by Supabase and served by an Express API.",
   "main": "server/index.js",
   "scripts": {
+    "build:cloudflare": "node scripts/build-cloudflare.js",
     "start": "node server/index.js",
     "dev": "node --watch server/index.js"
   },
